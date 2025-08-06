@@ -32,7 +32,7 @@ selfservice:
                 method: POST
                 response:
                   parse: true
-                url: http://allowlist:8080/v1/validate
+                url: http://localhost:8080/v1/validate
               hook: web_hook
 ```
 
