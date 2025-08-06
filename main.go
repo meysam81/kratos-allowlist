@@ -87,8 +87,10 @@ func main() {
 	app := NewApp(config)
 
 	router := chimux.NewChi()
-	apiv1 := chimux.NewChi(chimux.WithHealthz(), chimux.WithMetrics(), chimux.WithLogger(app.logger), chimux.WithLoggingMiddleware())
+	apiv1 := chimux.NewChi(chimux.WithLogger(app.logger), chimux.WithLoggingMiddleware())
+	internal := chimux.NewChi(chimux.WithHealthz(), chimux.WithMetrics())
 	router.Mount("/v1", apiv1)
+	router.Mount("/", internal)
 
 	apiv1.Post("/validate", app.Validate)
 
