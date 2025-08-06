@@ -3,6 +3,7 @@ module github.com/meysam81/allowlist
 go 1.24.4
 
 require (
+	github.com/AfterShip/email-verifier v1.4.1
 	github.com/goccy/go-json v0.10.5
 	github.com/meysam81/x v1.10.0
 )
@@ -13,6 +14,7 @@ require (
 	github.com/fsnotify/fsnotify v1.9.0 // indirect
 	github.com/go-chi/chi/v5 v5.2.2 // indirect
 	github.com/go-viper/mapstructure/v2 v2.3.0 // indirect
+	github.com/hbollon/go-edlib v1.6.0 // indirect
 	github.com/knadh/koanf/maps v0.1.2 // indirect
 	github.com/knadh/koanf/parsers/json v1.0.0 // indirect
 	github.com/knadh/koanf/parsers/yaml v1.1.0 // indirect
@@ -32,6 +34,8 @@ require (
 	github.com/prometheus/procfs v0.17.0 // indirect
 	github.com/rs/zerolog v1.34.0 // indirect
 	go.yaml.in/yaml/v3 v3.0.4 // indirect
+	golang.org/x/net v0.42.0 // indirect
 	golang.org/x/sys v0.34.0 // indirect
+	golang.org/x/text v0.27.0 // indirect
 	google.golang.org/protobuf v1.36.6 // indirect
 )
