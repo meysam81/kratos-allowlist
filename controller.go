@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"io"
 	"net/http"
 	"strings"
 	"sync"
@@ -16,8 +17,6 @@ var (
 			return &ev.Verifier{}
 		},
 	}
-
-	RespondOK = []byte(`{"status":"ok","message":"email is allowed"}`)
 )
 
 func (a *AppState) respondWithInterface(w http.ResponseWriter, body interface{}) {
@@ -49,7 +48,15 @@ func NewValidationResponse(text string, context map[string]interface{}) *Validat
 func (a *AppState) Validate(w http.ResponseWriter, r *http.Request) {
 	var req WebhookRequest
 
-	err := json.NewDecoder(r.Body).Decode(&req)
+	body, err := io.ReadAll(io.NopCloser(r.Body))
+	if err != nil {
+		a.logger.Error().Err(err).Msg("failed reading request body")
+		w.WriteHeader(http.StatusBadRequest)
+		a.respondWithInterface(w, map[string]string{"error": "invalid request body"})
+		return
+	}
+
+	err = json.Unmarshal(body, &req)
 	if err != nil {
 		a.logger.Error().Err(err).Msg("failed deserializing request body")
 		w.WriteHeader(http.StatusBadRequest)
@@ -88,5 +95,5 @@ func (a *AppState) Validate(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.WriteHeader(http.StatusOK)
-	a.respondWithInterface(w, RespondOK)
+	a.respondWithInterface(w, body)
 }

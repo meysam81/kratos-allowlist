@@ -61,6 +61,7 @@ jobs:
             ghcr.io/${{ github.repository }}:latest
             ghcr.io/${{ github.repository }}:${{ github.run_id }}
             ghcr.io/${{ github.repository }}:${{ github.sha }}
+          platforms: linux/arm64
 
   release-please:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
