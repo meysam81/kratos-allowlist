@@ -27,6 +27,6 @@ FROM scratch AS final
 
 COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 COPY LICENSE .
-COPY --from=builder /app/entrypoint /kratos-allowlist
+COPY --from=builder /app/kratos-allowlist /kratos-allowlist
 
 ENTRYPOINT ["/kratos-allowlist"]
