@@ -27,6 +27,7 @@ var (
 )
 
 func (a *AppState) respondWithInterface(w http.ResponseWriter, body interface{}) {
+	w.Header().Set("Content-Type", "application/json")
 	err := json.NewEncoder(w).Encode(body)
 	if err != nil {
 		a.logger.Error().Err(err).Msg("failed writing response body")
@@ -84,7 +85,6 @@ func (a *AppState) Validate(w http.ResponseWriter, r *http.Request) {
 	domain := strings.ToLower(verifResult.Syntax.Domain)
 
 	if !a.allowedDomains[domain] {
-		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusBadRequest)
 
 		response := NewValidationResponse(fmt.Sprintf("Registration is restricted to authorized domains. Domain '%s' is not allowed.", domain), nil)
