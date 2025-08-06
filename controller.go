@@ -13,7 +13,7 @@ import (
 var (
 	evPool sync.Pool = sync.Pool{
 		New: func() any {
-			return &ev.Verifier{}
+			return ev.NewVerifier().EnableGravatarCheck()
 		},
 	}
 
@@ -75,7 +75,7 @@ func (a *AppState) Validate(w http.ResponseWriter, r *http.Request) {
 
 	a.logger.Info().Interface("verification_result", verifResult).Msg("verification result ready")
 
-	if !verifResult.Syntax.Valid || verifResult.Disposable || verifResult.RoleAccount || verifResult.Free {
+	if !verifResult.Syntax.Valid || verifResult.Disposable || verifResult.RoleAccount || verifResult.Free || !verifResult.HasMxRecords {
 		response := NewValidationResponse("Provided email is invalid. Please provide a valid business email.", nil)
 		a.respondWithInterface(w, response)
 		return
