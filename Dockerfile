@@ -21,12 +21,12 @@ ENV CGO_ENABLED=0
 
 COPY . .
 RUN --mount=type=cache,target=/go/pkg/mod \
-  go build -ldflags="-s -w -extldflags '-static' -X main.version=${VERSION} -X main.commit=${COMMIT} -X main.date=${DATE} -X main.builtBy=${BUILT_BY}" -trimpath -o entrypoint
+  go build -ldflags="-s -w -extldflags '-static' -X main.version=${VERSION} -X main.commit=${COMMIT} -X main.date=${DATE} -X main.builtBy=${BUILT_BY}" -trimpath -o kratos-allowlist
 
 FROM scratch AS final
 
 COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 COPY LICENSE .
-COPY --from=builder /app/entrypoint /entrypoint
+COPY --from=builder /app/entrypoint /kratos-allowlist
 
-ENTRYPOINT ["/entrypoint"]
+ENTRYPOINT ["/kratos-allowlist"]
