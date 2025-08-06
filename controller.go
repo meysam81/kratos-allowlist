@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"io"
 	"net/http"
 	"strings"
 	"sync"
@@ -15,6 +14,14 @@ var (
 	evPool sync.Pool = sync.Pool{
 		New: func() any {
 			return &ev.Verifier{}
+		},
+	}
+
+	successResponse = &SuccessfulResponse{
+		Identity: &Identity{
+			MetadataAdmin: map[string]string{
+				"domain_authorized": "true",
+			},
 		},
 	}
 )
@@ -48,15 +55,7 @@ func NewValidationResponse(text string, context map[string]interface{}) *Validat
 func (a *AppState) Validate(w http.ResponseWriter, r *http.Request) {
 	var req WebhookRequest
 
-	body, err := io.ReadAll(io.NopCloser(r.Body))
-	if err != nil {
-		a.logger.Error().Err(err).Msg("failed reading request body")
-		w.WriteHeader(http.StatusBadRequest)
-		a.respondWithInterface(w, map[string]string{"error": "invalid request body"})
-		return
-	}
-
-	err = json.Unmarshal(body, &req)
+	err := json.NewDecoder(r.Body).Decode(&req)
 	if err != nil {
 		a.logger.Error().Err(err).Msg("failed deserializing request body")
 		w.WriteHeader(http.StatusBadRequest)
@@ -95,5 +94,5 @@ func (a *AppState) Validate(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.WriteHeader(http.StatusOK)
-	a.respondWithInterface(w, body)
+	a.respondWithInterface(w, successResponse)
 }
