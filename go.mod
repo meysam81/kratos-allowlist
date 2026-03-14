@@ -4,7 +4,7 @@ go 1.24.4
 
 require (
 	github.com/AfterShip/email-verifier v1.4.1
-	github.com/goccy/go-json v0.10.5
+	github.com/goccy/go-json v0.10.6
 	github.com/meysam81/x v1.10.0
 )
 
