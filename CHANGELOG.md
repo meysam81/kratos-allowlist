@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.0.1](https://github.com/meysam81/kratos-allowlist/compare/v1.0.0...v1.0.1) (2026-11-03)
+
+
+### Bug Fixes
+
+* **ci:** let lychee accept 2xx again ([#25](https://github.com/meysam81/kratos-allowlist/issues/25)) ([61a1e19](https://github.com/meysam81/kratos-allowlist/commit/61a1e190b10d67940770a26dc215eb3bfe8f9392))
+
+
+### CI
+
+* pin actions to commit SHAs, renovate on the shared preset, release-please manifest config ([#18](https://github.com/meysam81/kratos-allowlist/issues/18)) ([80c310e](https://github.com/meysam81/kratos-allowlist/commit/80c310e03cb28650ab5aee30d0c496ac8577cfac))
+
 ## 1.0.0 (2025-08-06)
 
 
