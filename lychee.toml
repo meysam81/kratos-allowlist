@@ -5,8 +5,6 @@ exclude = [
 exclude_path = [
 ]
 
-accept = []
-
 cache = true
 
 max_cache_age = "7d"
