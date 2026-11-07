@@ -1,6 +1,6 @@
 module github.com/meysam81/allowlist
 
-go 1.24.4
+go 1.27.3
 
 require (
 	github.com/AfterShip/email-verifier v1.4.1
