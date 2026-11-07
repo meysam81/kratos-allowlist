@@ -1,6 +1,6 @@
 module github.com/meysam81/allowlist
 
-go 1.24.4
+go 1.25.0
 
 require (
 	github.com/AfterShip/email-verifier v1.4.1
@@ -36,6 +36,6 @@ require (
 	go.yaml.in/yaml/v3 v3.0.4 // indirect
 	golang.org/x/net v0.42.0 // indirect
 	golang.org/x/sys v0.34.0 // indirect
-	golang.org/x/text v0.27.0 // indirect
+	golang.org/x/text v0.41.0 // indirect
 	google.golang.org/protobuf v1.36.6 // indirect
 )
