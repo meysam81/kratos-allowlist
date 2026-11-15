@@ -1,4 +1,4 @@
-FROM golang:1.24 AS mod
+FROM golang:1.25@sha256:699337d620559a59b4a2bb298ad59611e535d2ee755a34cf2d2a98f37578dc80 AS mod
 
 WORKDIR /app
 
@@ -8,7 +8,7 @@ RUN --mount=type=bind,source=go.mod,target=go.mod \
     go mod download
 
 
-FROM golang:1.24 AS builder
+FROM golang:1.25@sha256:699337d620559a59b4a2bb298ad59611e535d2ee755a34cf2d2a98f37578dc80 AS builder
 
 ARG VERSION=dev
 ARG COMMIT=none
